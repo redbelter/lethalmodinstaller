@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/LethalRed/.vs/LethalRed
+/LethalRed/bin/Debug
+/LethalRed/obj/Debug
+/LethalRed/packages
