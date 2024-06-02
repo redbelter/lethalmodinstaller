@@ -25,11 +25,11 @@ namespace LethalRed
                 }
             }
             var z = ret.Result["BepInEx-BepInExPack"];
-            var y = ret.Result["BepInEx-BepInExPackk"].GetLatestVersion();
+            var y = ret.Result["BepInEx-BepInExPack"].GetLatestVersion();
             y.DownloadPackage("temp.zip");
           
-            //var xx = CheckForVirus.CheckFile("temp.zip");
-            //xx.Wait();
+            var xx = CheckForVirus.CheckFile("temp.zip");
+            xx.Wait();
 
             Console.ReadLine();
         }
