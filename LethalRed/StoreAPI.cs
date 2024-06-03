@@ -69,21 +69,28 @@ namespace LethalRed
     public class StoreAPI
     {
 
-        
+        public static Dictionary<string, ModPackage> packageCache = new Dictionary<string, ModPackage>();
+
+
         private static HttpClient sharedClient = new HttpClient()
         {
             BaseAddress = new Uri("https://thunderstore.io"),
         };
-        public static async Task<Dictionary<string, ModPackage>> GetPackages()
+        public static async Task<Dictionary<string, ModPackage>> GetPackages(bool useCache = true)
         {
             //https://thunderstore.io/api/v1/package/
-
-            Dictionary<string, ModPackage> packages = new Dictionary<string, ModPackage>();
+            if(packageCache.Count > 0 && useCache)
+            {
+                return packageCache;
+            }
+            packageCache = new Dictionary<string, ModPackage>();
             ///c/{community_identifier}/api/v1/package/
             //string ret = await sharedClient.GetStringAsync("/api/v1/package/");
+            Console.WriteLine("Downloading package list from Thunderstore");
             string ret = await sharedClient.GetStringAsync("/c/lethal-company/api/v1/package/");
             dynamic array = JsonConvert.DeserializeObject(ret);
-            packages.Clear();
+            Console.WriteLine("Parsing package list");
+            packageCache.Clear();
             foreach (var item in array)
             {
                 ModPackage x = new ModPackage(item);
@@ -91,17 +98,17 @@ namespace LethalRed
                 {
                     throw new Exception("wtf");
                 }
-                if (packages.ContainsKey(x.FullName))
+                if (packageCache.ContainsKey(x.FullName))
                 {
                     //throw new Exception(":(");
                     //Just skip it
                 }
                 else
                 {
-                    packages.Add(x.FullName, x);
+                    packageCache.Add(x.FullName, x);
                 }
             }
-            return packages;
+            return packageCache;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace LethalRed
     public class CheckForVirus
     {
 
+        //returns true if it' safe
         public static async Task<bool> CheckFile(string path, bool printResult = false, int percentThreshold = 50)
         {
             VirusTotal virusTotal = new VirusTotal("40d7fca521c042e1ca37a4cce62e2efcc7a4f9aecd05367e5387c928de205f40");
@@ -96,6 +97,7 @@ namespace LethalRed
 
         }
 
+        //Returns true if it's safe
         private static bool CheckResult(int percentThreshold, FileReport file, ScanResult scanresult)
         {
             if(file != null)
