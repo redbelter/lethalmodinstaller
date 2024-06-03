@@ -29,7 +29,7 @@ namespace LethalRed
             //Check if the file has been scanned before.
             FileReport report = await virusTotal.GetFileReportAsync(fileToScan);
 
-            Console.WriteLine("Seen before: " + (report.ResponseCode == FileReportResponseCode.Present ? "Yes" : "No"));
+            //Console.WriteLine("Seen before: " + (report.ResponseCode == FileReportResponseCode.Present ? "Yes" : "No"));
 
 
             //Check if the file has been scanned before.
@@ -37,7 +37,7 @@ namespace LethalRed
 
             bool hasFileBeenScannedBefore = fileReport.ResponseCode == FileReportResponseCode.Present;
 
-            Console.WriteLine("File has been scanned before: " + (hasFileBeenScannedBefore ? "Yes" : "No"));
+           // Console.WriteLine("File has been scanned before: " + (hasFileBeenScannedBefore ? "Yes" : "No"));
 
 
             //If the file has been scanned before, the results are embedded inside the report.
