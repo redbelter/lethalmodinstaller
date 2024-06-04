@@ -17,7 +17,7 @@ namespace LethalRed
     {
 
         //returns true if it' safe
-        public static async Task<bool> CheckFile(string path, bool printResult = false, int percentThreshold = 50)
+        public static async Task<bool> CheckFile(string friendlyName, string path, bool printResult = false, int percentThreshold = 50)
         {
             VirusTotal virusTotal = new VirusTotal("40d7fca521c042e1ca37a4cce62e2efcc7a4f9aecd05367e5387c928de205f40");
 
@@ -58,7 +58,7 @@ namespace LethalRed
                     PrintScan(fileResult);
                 }
             }
-            return CheckResult(percentThreshold, fileReport, fileResult);
+            return CheckResult(friendlyName, percentThreshold, fileReport, fileResult);
         }
 
 
@@ -98,7 +98,7 @@ namespace LethalRed
         }
 
         //Returns true if it's safe
-        private static bool CheckResult(int percentThreshold, FileReport file, ScanResult scanresult)
+        private static bool CheckResult(string friendlyName, int percentThreshold, FileReport file, ScanResult scanresult)
         {
             if(file != null)
             {
@@ -117,6 +117,7 @@ namespace LethalRed
                     }
                     if(total/2 > fail)
                     {
+                        Console.WriteLine(friendlyName + " was scanned. " + fail + " out of " + total + " think it's a virus.");
                         return true;
                     }
                     return false;

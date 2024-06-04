@@ -22,7 +22,7 @@ namespace LethalRed
             }
             FullName = request[0] + "-" + request[1];
             Name = request[1];
-            if (request.Length == 3)
+            if (request.Length > 3)
             {
                 VersionSpecified = true;
                 Version = request[2];
@@ -30,12 +30,21 @@ namespace LethalRed
             } else {
                 VersionSpecified = false;
             }
+            if (request.Length >= 4)
+            {
+                CopyIntoPlugin = true;
+                
+            } else
+            {
+                CopyIntoPlugin = false;
+            }
         }
 
         public string FullName { get; set; }
         public string Name { get; set; }
 
         public bool VersionSpecified { get; set; }
+        public bool CopyIntoPlugin { get; set; }
         public Version ProperVersion { get; set; }
         public string Version { get; set; }
 

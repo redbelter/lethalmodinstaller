@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckForVirus.cs" />
+    <Compile Include="FileIO.cs" />
     <Compile Include="LethalModUtil.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="Program.cs" />
@@ -61,6 +62,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lethalmods.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
