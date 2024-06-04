@@ -15,6 +15,7 @@ namespace LethalRed
     public class LethalModUtil
     {
 
+        public static bool WaitForScan = false;
         private static readonly string TEMP_DIRECTORY = "tempout";
         private static readonly string FAKE_LETHAL = "fakelethal";
         private static readonly string MODDEDLIST = "moddedfiles.txt";
@@ -105,18 +106,22 @@ namespace LethalRed
 
             Console.WriteLine("Scanning " + req.FullName);
             bool pass = true;
-            try
+            bool waitforever = true;
+            while (waitforever)
             {
-                var xx = CheckForVirus.CheckFile(req.FullName, "temp.zip");
-                //Console.WriteLine("Sleeping for a minute to because this is a free virus scan and it's throttled.");
-                //Thread.Sleep(60000);
-
-                xx.Wait();
-                pass = xx.Result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("throttled antivirus");
+                waitforever = LethalModUtil.WaitForScan;
+                try
+                {
+                    var xx = CheckForVirus.CheckFile(req.FullName, "temp.zip");
+                    xx.Wait();
+                    pass = xx.Result;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("throttled antivirus");
+                    Console.WriteLine("Sleeping for a minute because this is a free virus scan and it's throttled. If you think this is annoying, run the program with a lot of arguments to skip it.");
+                    Thread.Sleep(60000);
+                }
             }
             if (!pass)
             {

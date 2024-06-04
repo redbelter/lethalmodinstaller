@@ -19,6 +19,11 @@ namespace LethalRed
     {
         static void Main(string[] args)
         {
+
+            if(args.Length > 3)
+            {
+                LethalModUtil.WaitForScan = false;
+            }
             
             if (!SteamUtil.IsLethalInstalled())
             {
