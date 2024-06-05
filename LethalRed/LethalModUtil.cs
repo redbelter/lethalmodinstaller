@@ -15,7 +15,7 @@ namespace LethalRed
     public class LethalModUtil
     {
 
-        public static bool WaitForScan = false;
+        public static bool WaitForScan = true;
         private static readonly string TEMP_DIRECTORY = "tempout";
         private static readonly string FAKE_LETHAL = "fakelethal";
         private static readonly string MODDEDLIST = "moddedfiles.txt";
@@ -78,13 +78,19 @@ namespace LethalRed
         public static void MoveTempModsToReal()
         {
             string fakeLethalPath = Path.Combine(FileIO.GetExecutableCurrentDir(), FAKE_LETHAL);
+            string tempPath = Path.Combine(FileIO.GetExecutableCurrentDir(), TEMP_DIRECTORY);
             Console.WriteLine("About to write to lethal folder, if you want to preview it you can go here: " + Environment.NewLine + fakeLethalPath);
             Console.WriteLine("The scan detected " + CheckForVirus.TotalVirusHits + " hits out of " + CheckForVirus.TotalChecks + ". If this is below 5 this is ok.");
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.WriteLine("Starting copy into: " + SteamUtil.GetLethalCompanyPath());
             FileIO.CopyFilesRecursively(fakeLethalPath, SteamUtil.GetLethalCompanyPath());
-            Console.WriteLine("Done copying mods to lethal company.");
+            Console.WriteLine("Done copying mods to lethal company. Attempting to delete the temp folders.");
+            try
+            {
+                Directory.Delete(fakeLethalPath, true);
+                Directory.Delete(tempPath, true);
+            } catch { }
         }
 
 
@@ -116,6 +122,7 @@ namespace LethalRed
                     var xx = CheckForVirus.CheckFile(req.FullName, "temp.zip");
                     xx.Wait();
                     pass = xx.Result;
+                    break; //get out :)
                 }
                 catch (Exception)
                 {
