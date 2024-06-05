@@ -65,13 +65,39 @@ namespace LethalRed
 
         public List<ModInstallRequest> AllMods = new List<ModInstallRequest>();
 
+        string defaultConfig = @"
+[
+    ""BepInEx-BepInExPack-5.4.2100"",
+    ""x753-More_Suits-1.4.3"", 
+   	""amnsoft-EmployeeAssignments-1.0.0"",
+    ""JunLethalCompany-GamblingMachineAtTheCompany-1.3.5"",
+    ""matsuura-HealthMetrics-1.0.2"",
+    ""RickArg-Helmet_Cameras-2.1.5"",
+    ""anormaltwig-LateCompany-1.0.13"",
+    ""BatTeam-LethalFashion-1.0.7"",
+    ""notnotnotswipez-MoreCompany-1.9.1"",
+    ""Jordo-NeedyCats-1.2.1"",
+    ""Midge-PushCompany-1.2.0"",
+    ""tinyhoot-ShipLoot-1.1.0"",
+    ""RugbugRedfern-Skinwalkers-5.0.0"",
+    ""FlipMods-TooManyEmotes-2.1.18"",
+    ""Verity-TooManySuits-1.0.9""
+]";
+
         public ModConfig()
         {
+            string jsontxt = "";
             if (!File.Exists(DEFAULT_MOD_FILE))
             {
-                throw new Exception("Mod description file doesn't exist");
+                Console.WriteLine("Could not find lethalmods.txt in current directory. Do you want to use red's recommended list? If so press enter");
+                Console.ReadLine();
+                jsontxt = defaultConfig;
             }
-            string jsontxt = File.ReadAllText(DEFAULT_MOD_FILE);
+            else
+            {
+                Console.WriteLine("Reading config from lethalmods.txt");
+                jsontxt = File.ReadAllText(DEFAULT_MOD_FILE);
+            }
             dynamic array = JsonConvert.DeserializeObject(jsontxt);
 
             foreach (var item in array)

@@ -16,6 +16,9 @@ namespace LethalRed
     public class CheckForVirus
     {
 
+        public static int TotalChecks = 0;
+        public static int TotalVirusHits = 0;
+
         //returns true if it' safe
         public static async Task<bool> CheckFile(string friendlyName, string path, bool printResult = false, int percentThreshold = 50)
         {
@@ -115,7 +118,9 @@ namespace LethalRed
                             fail++;
                         }
                     }
-                    if(total/2 > fail)
+                    TotalChecks += total;
+                    TotalVirusHits += fail;
+                    if (total/2 > fail)
                     {
                         Console.WriteLine(friendlyName + " was scanned. " + fail + " out of " + total + " think it's a virus.");
                         return true;

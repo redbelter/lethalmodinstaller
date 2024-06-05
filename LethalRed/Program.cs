@@ -19,10 +19,16 @@ namespace LethalRed
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("This program mods lethal company and checks the mods against virustotal.");
+            Console.WriteLine("This is recommended to avoid being hacked, but this can take up to one minute per mod.");
+            Console.WriteLine("If you don't care type 'dontcare' below to skip the virus check. If you care, press enter");
 
-            if(args.Length > 3)
+            string dontcarecheck = Console.ReadLine();
+            if (dontcarecheck != null && dontcarecheck.Equals("dontcare", StringComparison.InvariantCultureIgnoreCase)) 
             {
                 LethalModUtil.WaitForScan = false;
+                Console.WriteLine("Skipping virus check confirmed, press enter to continue.");
+                Console.ReadLine();
             }
             
             if (!SteamUtil.IsLethalInstalled())
@@ -52,7 +58,7 @@ namespace LethalRed
 
             LethalModUtil.MoveTempModsToReal();
 
-            Console.WriteLine("Done, press enter to exit");
+            Console.WriteLine("Done modding lethal company! Thanks for using this. Press enter to exit");
             Console.ReadLine();
         }
 

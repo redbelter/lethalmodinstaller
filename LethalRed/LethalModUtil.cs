@@ -79,11 +79,12 @@ namespace LethalRed
         {
             string fakeLethalPath = Path.Combine(FileIO.GetExecutableCurrentDir(), FAKE_LETHAL);
             Console.WriteLine("About to write to lethal folder, if you want to preview it you can go here: " + Environment.NewLine + fakeLethalPath);
+            Console.WriteLine("The scan detected " + CheckForVirus.TotalVirusHits + " hits out of " + CheckForVirus.TotalChecks + ". If this is below 5 this is ok.");
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.WriteLine("Starting copy into: " + SteamUtil.GetLethalCompanyPath());
             FileIO.CopyFilesRecursively(fakeLethalPath, SteamUtil.GetLethalCompanyPath());
-            Console.WriteLine("Done copying");
+            Console.WriteLine("Done copying mods to lethal company.");
         }
 
 
@@ -116,10 +117,10 @@ namespace LethalRed
                     xx.Wait();
                     pass = xx.Result;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("throttled antivirus");
-                    Console.WriteLine("Sleeping for a minute because this is a free virus scan and it's throttled. If you think this is annoying, run the program with a lot of arguments to skip it.");
+                    Console.WriteLine("Sleeping for a minute because this is a free virus scan and it's throttled.");
                     Thread.Sleep(60000);
                 }
             }
