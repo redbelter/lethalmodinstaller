@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj": {}
+    "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\UnitTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj": {
+    "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj",
+        "projectUniqueName": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\UnitTests.csproj",
         "projectName": "UnitTests",
-        "projectPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj",
+        "projectPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\UnitTests.csproj",
         "packagesPath": "C:\\Users\\red\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\obj\\",
+        "outputPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\red\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3kFYKLxg4OA=",
+  "dgSpecHash": "VQAMXZ633LY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj",
+  "projectFilePath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalTests\\UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\red\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\red\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
