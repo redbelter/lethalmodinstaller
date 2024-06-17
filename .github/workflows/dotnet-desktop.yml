@@ -93,3 +93,4 @@ jobs:
       with:
         name: bins
         path: bin\Release\*
+        retention-days: 5
