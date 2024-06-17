@@ -1002,11 +1002,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\UnitTests\\UnitTests.csproj",
+      "projectPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\UnitTests.csproj",
       "packagesPath": "C:\\Users\\red\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\red\\Documents\\GitHub\\lethalmodinstaller\\LethalRed\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\red\\AppData\\Roaming\\NuGet\\NuGet.Config",
