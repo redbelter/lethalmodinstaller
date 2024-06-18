@@ -46,6 +46,21 @@ on:
 
 jobs:
 
+  taggy:
+     name: Generate tag
+     runs-on: ubuntu-latest
+     steps:
+       - name: Check out code
+         uses: actions/checkout@master
+         with:
+            fetch-depth: '0'
+
+       - name: Bump version and push tag
+         uses: ChloePlanet/github-tag-action@master
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+
   build:
 
     strategy:
@@ -96,12 +111,7 @@ jobs:
         retention-days: 5
 
 
-    - name: Git Tag Generator
-      uses: ChloePlanet/github-tag-action@2.0.0
-      id: tag_version
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+    
             
     - name: Create Release
       id: create_release
