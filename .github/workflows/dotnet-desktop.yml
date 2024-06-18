@@ -95,13 +95,21 @@ jobs:
         path: bin\Release\*
         retention-days: 5
 
+
+    - name: Git Tag Generator
+      uses: ChloePlanet/github-tag-action@2.0.0
+      id: tag_version
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+            
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 0.0.3
+        tag_name: ${{ steps.tag_version.outsput.new_tag }}
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: true
