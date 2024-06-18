@@ -11,3 +11,11 @@
 /LethalRed/obj/Release
 /LethalRed/publish
 /LethalRed/release
+/.vs/LethalRed
+/bin/Debug
+/obj/Debug
+/packages
+/bin/Release
+/obj/Release
+/publish
+/release
