@@ -19,3 +19,5 @@
 /obj/Release
 /publish
 /release
+/LethalTests/bin
+/LethalTests/obj
