@@ -102,16 +102,13 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-      # Execute all builds
-    - name: Execute build
-      run: dotnet build
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: bins
-        path: bin\Release\*
+        path: LethalRed\bin\Release\*
         retention-days: 5
 
 
