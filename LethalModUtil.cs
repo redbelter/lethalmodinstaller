@@ -61,7 +61,7 @@ namespace LethalRed
 
             foreach (string file in FileIO.GetFiles(FAKE_LETHAL))
             {
-                files.Add(file);
+                files.Add(file.Replace(FAKE_LETHAL, "").Substring(1));
             }
 
             FileIO.DeleteFileIfExists(Path.Combine(FAKE_LETHAL, MODDEDLIST));
@@ -77,10 +77,17 @@ namespace LethalRed
 
         public static void MoveTempModsToReal()
         {
+            GenerateModFileList();
             string fakeLethalPath = Path.Combine(FileIO.GetExecutableCurrentDir(), FAKE_LETHAL);
             string tempPath = Path.Combine(FileIO.GetExecutableCurrentDir(), TEMP_DIRECTORY);
             Console.WriteLine("About to write to lethal folder, if you want to preview it you can go here: " + Environment.NewLine + fakeLethalPath);
-            Console.WriteLine("The scan detected " + CheckForVirus.TotalVirusHits + " hits out of " + CheckForVirus.TotalChecks + ". If this is below 5 this is ok.");
+            if (LethalModUtil.WaitForScan)
+            {
+                Console.WriteLine("The scan detected " + CheckForVirus.TotalVirusHits + " hits out of " + CheckForVirus.TotalChecks + ". If this is below 5 this is ok.");
+            } else
+            {
+                Console.WriteLine("We did not scan throughly for viruses...");
+            }
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.WriteLine("Starting copy into: " + SteamUtil.GetLethalCompanyPath());
@@ -106,12 +113,12 @@ namespace LethalRed
             {
                 throw new Exception("can't install package, can't find it" + req.FullName);
             }
-            Console.WriteLine("Downloading " + req.FullName);
+            Console.WriteLine("\t Downloading " + req.FullName);
             var latest = yz.Value.Value.GetLatestVersion();
             File.Delete("temp.zip");
             latest.DownloadPackage("temp.zip");
 
-            Console.WriteLine("Scanning " + req.FullName);
+            Console.WriteLine("\t Scanning " + req.FullName);
             bool pass = true;
             bool waitforever = true;
             while (waitforever)
@@ -126,21 +133,27 @@ namespace LethalRed
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("throttled antivirus");
-                    Console.WriteLine("Sleeping for a minute because this is a free virus scan and it's throttled.");
-                    Thread.Sleep(60000);
+                    if (waitforever)
+                    {
+                        Console.WriteLine("\t Sleeping for a minute because this is a free virus scan and it's throttled.");
+                        Thread.Sleep(60000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\t Scan throttled, not waiting");
+                    }
                 }
             }
             if (!pass)
             {
-                Console.WriteLine("File might be a virus, not installing");
+                Console.WriteLine("--> File might be a virus, not installing");
                 File.Delete("temp.zip");
             }
             else
             {
-                Console.WriteLine("Mod passed virus check");
+                Console.WriteLine("\t Mod passed virus check");
                 //Install
-                Console.WriteLine("Installing " + req.FullName);
+                Console.WriteLine("\t Installing " + req.FullName);
                 while (Directory.Exists(TEMP_DIRECTORY))
                 {
                     Directory.Delete(TEMP_DIRECTORY, true);

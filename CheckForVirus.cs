@@ -122,7 +122,7 @@ namespace LethalRed
                     TotalVirusHits += fail;
                     if (total/2 > fail)
                     {
-                        Console.WriteLine(friendlyName + " was scanned. " + fail + " out of " + total + " think it's a virus.");
+                        Console.WriteLine("\t "+friendlyName + " was scanned. " + fail + " out of " + total + " think it's a virus.");
                         return true;
                     }
                     return false;

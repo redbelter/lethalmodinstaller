@@ -86,10 +86,10 @@ namespace LethalRed
             packageCache = new Dictionary<string, ModPackage>();
             ///c/{community_identifier}/api/v1/package/
             //string ret = await sharedClient.GetStringAsync("/api/v1/package/");
-            Console.WriteLine("Downloading package list from Thunderstore");
+            Console.WriteLine("\t Downloading package list from Thunderstore");
             string ret = await sharedClient.GetStringAsync("/c/lethal-company/api/v1/package/");
             dynamic array = JsonConvert.DeserializeObject(ret);
-            Console.WriteLine("Parsing package list");
+            Console.WriteLine("\t Parsing package list");
             packageCache.Clear();
             foreach (var item in array)
             {

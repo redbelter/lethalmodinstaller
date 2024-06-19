@@ -42,14 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LethalRed.exe" size="31136">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Gameloop.Vdf.dll" size="41984">
+      <assemblyIdentity name="Gameloop.Vdf" version="0.6.2.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Ml3is5gInxNuI+YjzxZYsDxRqCGpJxBpt0zEGH00guA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LethalRed.exe" size="33184">
       <assemblyIdentity name="LethalRed" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UljEDXN5ml8LB2KLYvm4KmfoRlXVLD8caNDtFWCW1u4=</dsig:DigestValue>
+        <dsig:DigestValue>DJbZEHktySk5fnxCKv9L/2zWz5Q1bTgfl19B5zCe0uo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

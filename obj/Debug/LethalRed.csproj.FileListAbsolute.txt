@@ -30,3 +30,5 @@ C:\Users\red\Documents\GitHub\lethalmodinstaller\obj\Debug\LethalRed.application
 C:\Users\red\Documents\GitHub\lethalmodinstaller\obj\Debug\LethalRed.csproj.Up2Date
 C:\Users\red\Documents\GitHub\lethalmodinstaller\obj\Debug\LethalRed.exe
 C:\Users\red\Documents\GitHub\lethalmodinstaller\obj\Debug\LethalRed.pdb
+C:\Users\red\Documents\GitHub\lethalmodinstaller\bin\Debug\Gameloop.Vdf.dll
+C:\Users\red\Documents\GitHub\lethalmodinstaller\bin\Debug\Gameloop.Vdf.xml

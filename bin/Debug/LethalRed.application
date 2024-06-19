@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="LethalRed.exe.manifest" size="5181">
+    <dependentAssembly dependencyType="install" codebase="LethalRed.exe.manifest" size="5823">
       <assemblyIdentity name="LethalRed.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>EmG1e/SsMiFIS+lADoBSMqDbn+vL2EwwUlG9mY5EcyM=</dsig:DigestValue>
+        <dsig:DigestValue>PayVQB4jgPCWc4jk8qHeQAkT8ao7NQkoldyxrWYAoL4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
