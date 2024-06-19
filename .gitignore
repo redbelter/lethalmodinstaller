@@ -23,3 +23,6 @@
 /LethalTests/obj
 /LethalTests/bin/Debug
 /LethalTests/obj/Debug
+/LethalTests/obj/Debug/net8.0/UnitTests.AssemblyInfo.cs
+/LethalTests/obj/Debug/net8.0/UnitTests.AssemblyInfoInputs.cache
+/LethalTests/obj/Debug/net8.0/UnitTests.csproj.AssemblyReference.cache
