@@ -92,7 +92,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: bins
-        path: ${{env.DOTNET_ROOT}}\bin\Release\*
+        path: D:\a\lethalmodinstaller\lethalmodinstaller\bin\Release\*
         retention-days: 5
 
 
