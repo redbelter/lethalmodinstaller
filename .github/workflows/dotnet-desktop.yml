@@ -46,23 +46,7 @@ on:
 
 jobs:
 
-  taggy:
-     name: Generate tag
-     runs-on: ubuntu-latest
-     steps:
-       - name: Check out code
-         uses: actions/checkout@master
-         with:
-            fetch-depth: '0'
-
-       - name: Bump version and push tag
-         uses: ChloePlanet/github-tag-action@master
-         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            WITH_V: true
-
   build:
-
     strategy:
       matrix:
         configuration: [Release]
@@ -108,7 +92,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: bins
-        path: LethalRed\bin\Release\*
+        path: ${{ env.GITHUB_WORKSPACE}}\bin\Release\*
         retention-days: 5
 
 
@@ -120,7 +104,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.tag_version.outsput.new_tag }}
+        tag_name: 0.0.5
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: true
