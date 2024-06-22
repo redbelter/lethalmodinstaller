@@ -89,8 +89,8 @@ namespace LethalRed
             string jsontxt = "";
             if (!File.Exists(DEFAULT_MOD_FILE))
             {
-                Console.WriteLine("Could not find lethalmods.txt in current directory. Do you want to use red's recommended list? If so press enter");
-                Console.ReadLine();
+                Console.WriteLine("Could not find lethalmods.txt in current directory. Using red's recommended list.");
+               // Console.ReadLine();
                 jsontxt = defaultConfig;
             }
             else
