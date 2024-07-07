@@ -22,7 +22,7 @@ namespace LethalRed
         {
             try
             {
-                Console.WriteLine("This program mods lethal company and checks the mods against virustotal.");
+                Console.WriteLine("This program mods games and checks the mods against virustotal.");
                 Console.WriteLine();
                 Console.WriteLine("The virus check can take 5-10 minutes, do you want to scan the mods for viruses?");
                 Console.WriteLine("\t(type 'scan' + enter to scan, or just press enter install as fast as possible)");
@@ -41,6 +41,13 @@ namespace LethalRed
                     Console.WriteLine("Skipping virus check confirmed...");
                     Thread.Sleep(1000);
                 }
+
+                if (!SteamUtil.IsCWInstalled())
+                {
+                    Console.WriteLine("Could not find Content Warning");
+                    //return;
+                }
+                Console.WriteLine("Found CW install path at: " + SteamUtil.GetCWPath());
 
                 if (!SteamUtil.IsLethalInstalled())
                 {

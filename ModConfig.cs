@@ -65,24 +65,27 @@ namespace LethalRed
 
         public List<ModInstallRequest> AllMods = new List<ModInstallRequest>();
 
-        string defaultConfig = @"
-[
-    ""BepInEx-BepInExPack-5.4.2100"",
-    ""x753-More_Suits-1.4.3"", 
-   	""amnsoft-EmployeeAssignments-1.0.0"",
-    ""JunLethalCompany-GamblingMachineAtTheCompany-1.3.5"",
-    ""matsuura-HealthMetrics-1.0.2"",
-    ""RickArg-Helmet_Cameras-2.1.5"",
-    ""anormaltwig-LateCompany-1.0.13"",
-    ""BatTeam-LethalFashion-1.0.7"",
-    ""notnotnotswipez-MoreCompany-1.9.1"",
-    ""Jordo-NeedyCats-1.2.1"",
-    ""Midge-PushCompany-1.2.0"",
-    ""tinyhoot-ShipLoot-1.1.0"",
-    ""RugbugRedfern-Skinwalkers-5.0.0"",
-    ""FlipMods-TooManyEmotes-2.1.18"",
-    ""Verity-TooManySuits-1.0.9""
-]";
+        string defaultConfig = @"{""LethalCompany"": [
+    ""BepInEx-BepInExPack"",
+    ""x753-More_Suits"", 
+   	""amnsoft-EmployeeAssignments"",
+    ""JunLethalCompany-GamblingMachineAtTheCompany"",
+    ""matsuura-HealthMetrics"",
+    ""RickArg-Helmet_Cameras"",
+    ""anormaltwig-LateCompany"",
+    ""BatTeam-LethalFashion"",
+    ""notnotnotswipez-MoreCompany"",
+    ""Jordo-NeedyCats"",
+    ""Midge-PushCompany"",
+    ""tinyhoot-ShipLoot"",
+    ""RugbugRedfern-Skinwalkers"",
+    ""FlipMods-TooManyEmotes"",
+    ""Verity-TooManySuits"",
+ 	""EliteMasterEric-Coroner"",
+    ""FlipMods-LetMeLookDown"",
+    ""TestAccount666-ShipWindows""
+]
+}";
 
         public ModConfig()
         {
@@ -100,10 +103,16 @@ namespace LethalRed
             }
             dynamic array = JsonConvert.DeserializeObject(jsontxt);
 
-            foreach (var item in array)
+            foreach(var game in array)
             {
-                AllMods.Add(new ModInstallRequest(item));
+                string nameOfGame = game.Name;
+                var mods = game.Value;
+                foreach (var item in mods)
+                {
+                    AllMods.Add(new ModInstallRequest(item));
+                }
             }
+           
         }
 
         

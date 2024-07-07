@@ -75,8 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckForVirus.cs" />
+    <Compile Include="ModInstallers\CWModInstaller.cs" />
     <Compile Include="FileIO.cs" />
-    <Compile Include="LethalModUtil.cs" />
+    <Compile Include="ModInstallers\IModInstall.cs" />
+    <Compile Include="ModInstallers\LethalModInstaller.cs" />
+    <Compile Include="ModInstallers\LethalModUtil.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,11 +89,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="LethalRed_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lethalmods.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -108,7 +106,6 @@
     <PackageReference Include="Gameloop.Vdf">
       <Version>0.6.2</Version>
     </PackageReference>
-  
     <PackageReference Include="ILRepack.Lib.MSBuild.Task">
       <Version>2.0.34</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -119,5 +116,4 @@
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
 </Project>

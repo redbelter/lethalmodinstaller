@@ -92,9 +92,29 @@ namespace LethalRed
             throw new Exception("Could not find lethal company :(");
         }
 
+
         public static bool IsLethalInstalled()
         {
             return Directory.Exists(GetLethalCompanyPath());
         }
+        public static bool IsCWInstalled()
+        {
+            return Directory.Exists(GetCWPath());
+        }
+
+        public static string GetCWPath()
+        {
+            foreach (string lib in GetLibraryPaths())
+            {
+                string test = Path.Combine(lib, "Content Warning");
+                if (Directory.Exists(test))
+                {
+                    return test;
+                }
+            }
+
+            throw new Exception("Could not find Content Warning :(");
+        }
+
     }
 }
