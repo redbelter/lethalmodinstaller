@@ -63,7 +63,7 @@ namespace LethalRed
             return instance;
         }
 
-        public List<ModInstallRequest> AllMods = new List<ModInstallRequest>();
+        public Dictionary<string, List<ModInstallRequest>> AllMods = new Dictionary<string, List<ModInstallRequest>>();
 
         string defaultConfig = @"{""LethalCompany"": [
     ""BepInEx-BepInExPack"",
@@ -87,6 +87,18 @@ namespace LethalRed
 ]
 }";
 
+        public List<ModInstallRequest> GetModsForGame(string game)
+        {
+            if (AllMods.ContainsKey(game))
+            {
+                return AllMods[game];
+            } 
+            else
+            {
+                throw new Exception("Could not find mod config for: " + game);
+            }
+        }
+
         public ModConfig()
         {
             string jsontxt = "";
@@ -109,7 +121,12 @@ namespace LethalRed
                 var mods = game.Value;
                 foreach (var item in mods)
                 {
-                    AllMods.Add(new ModInstallRequest(item));
+                    if (!AllMods.ContainsKey(nameOfGame))
+                    {
+                        AllMods.Add(nameOfGame, new List<ModInstallRequest>());
+                    }
+
+                    AllMods[nameOfGame].Add(new ModInstallRequest(item));
                 }
             }
            

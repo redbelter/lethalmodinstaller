@@ -77,6 +77,7 @@
     <Compile Include="CheckForVirus.cs" />
     <Compile Include="ModInstallers\CWModInstaller.cs" />
     <Compile Include="FileIO.cs" />
+    <Compile Include="ModInstallers\GenericModInstallFlow.cs" />
     <Compile Include="ModInstallers\IModInstall.cs" />
     <Compile Include="ModInstallers\LethalModInstaller.cs" />
     <Compile Include="ModInstallers\LethalModUtil.cs" />

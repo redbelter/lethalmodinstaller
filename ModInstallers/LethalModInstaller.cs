@@ -8,6 +8,11 @@ namespace LethalRed
 {
     public class LethalModInstaller : IModInstall
     {
+
+        public string GetGameName()
+        {
+            return "Lethal Company";
+        }
         public bool CleanTempModFolder()
         {
             LethalModUtil.CleanTempModFolder();

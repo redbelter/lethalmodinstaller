@@ -8,6 +8,7 @@ namespace LethalRed
 {
     public interface IModInstall
     {
+        string GetGameName();
 
         bool IsGameInstalled();
 

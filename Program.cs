@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LethalRed.ModInstallers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections;
@@ -42,49 +43,10 @@ namespace LethalRed
                     Thread.Sleep(1000);
                 }
 
-                if (!SteamUtil.IsCWInstalled())
-                {
-                    Console.WriteLine("Could not find Content Warning");
-                    //return;
-                }
-                Console.WriteLine("Found CW install path at: " + SteamUtil.GetCWPath());
+                GenericModInstallFlow.AskWhichGame();
+                
 
-                if (!SteamUtil.IsLethalInstalled())
-                {
-                    Console.WriteLine("Could not find Lethal company, exiting");
-                    return;
-                }
-                Console.WriteLine("Found lethal install path at: " + SteamUtil.GetLethalCompanyPath());
-
-                if (LethalModUtil.IsAlreadyModded())
-                {
-                    Console.WriteLine("Lethal appears to be modded already.");
-                    Console.WriteLine("Press enter to remove existing mods.");
-                    Console.Write("> ");
-                    Console.ReadLine();
-                    LethalModUtil.CleanUpOldMods();
-                }
-                else
-                {
-                    Console.WriteLine("Lethal does not appear modded from a quick look.");
-                }
-
-                ModConfig modsToInstall = ModConfig.GetInstance();
-                LethalModUtil.CleanTempModFolder();
-
-                int current = 1;
-                int max = modsToInstall.AllMods.Count;
-                foreach (ModInstallRequest request in modsToInstall.AllMods)
-                {
-                    Console.WriteLine("Installing mod " + current + " out of " + max);
-                    LethalModUtil.InstallModToTemp(request, true);
-                    current++;
-                }
-
-                LethalModUtil.MoveTempModsToReal();
-
-                Console.WriteLine("Done modding lethal company! Thanks for using this. Press enter to exit");
-                Console.ReadLine();
+                
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());

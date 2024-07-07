@@ -8,6 +8,11 @@ namespace LethalRed
 {
     public class CWModInstaller : IModInstall
     {
+        public string GetGameName()
+        {
+            return "Content Warning";
+        }
+
         public bool CleanTempModFolder()
         {
             throw new NotImplementedException();
@@ -25,7 +30,7 @@ namespace LethalRed
 
         public bool IsGameInstalled()
         {
-            throw new NotImplementedException();
+            return SteamUtil.IsCWInstalled();
         }
 
         public bool IsModInstalled()
