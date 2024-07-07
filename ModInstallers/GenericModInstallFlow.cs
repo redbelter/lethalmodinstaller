@@ -83,7 +83,7 @@ namespace LethalRed.ModInstallers
                     Console.WriteLine("Press enter to remove existing mods.");
                     Console.Write("> ");
                     Console.ReadLine();
-                    LethalModUtil.CleanUpOldMods();
+                    mod.CleanUpOldMods();
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace LethalRed.ModInstallers
                 foreach (ModInstallRequest request in modsToInstall)
                 {
                     Console.WriteLine("Installing mod " + current + " out of " + max);
-                    LethalModUtil.InstallModToTemp(request, true);
+                    mod.InstallModsToTempFolder(request, true);
                     current++;
                 }
 

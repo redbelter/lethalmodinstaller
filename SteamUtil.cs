@@ -78,43 +78,28 @@ namespace LethalRed
             return libscache.ToArray();
         }
 
-        public static string GetLethalCompanyPath()
+        public static string GetGenericGamePath(IModInstall gamemod)
         {
             foreach (string lib in GetLibraryPaths())
             {
-                string test = Path.Combine(lib, "Lethal Company");
+                string test = Path.Combine(lib, gamemod.GetSteamGameName());
                 if (Directory.Exists(test))
                 {
                     return test;
                 }
             }
 
-            throw new Exception("Could not find lethal company :(");
+            throw new Exception("Could not find " + gamemod.GetSteamGameName() + " :(");
         }
 
-
-        public static bool IsLethalInstalled()
+        public static bool IsGenericGameInstalled(IModInstall gamemod)
         {
-            return Directory.Exists(GetLethalCompanyPath());
-        }
-        public static bool IsCWInstalled()
-        {
-            return Directory.Exists(GetCWPath());
+            return Directory.Exists(GetGenericGamePath(gamemod));
         }
 
-        public static string GetCWPath()
-        {
-            foreach (string lib in GetLibraryPaths())
-            {
-                string test = Path.Combine(lib, "Content Warning");
-                if (Directory.Exists(test))
-                {
-                    return test;
-                }
-            }
+      
 
-            throw new Exception("Could not find Content Warning :(");
-        }
+     
 
     }
 }

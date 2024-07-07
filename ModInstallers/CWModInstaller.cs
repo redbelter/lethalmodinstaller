@@ -6,39 +6,32 @@ using System.Threading.Tasks;
 
 namespace LethalRed
 {
-    public class CWModInstaller : IModInstall
+    public class CWModInstaller : IModInstallBasic
     {
-        public string GetGameName()
+        public override string GetSteamGameName()
         {
             return "Content Warning";
         }
 
-        public bool CleanTempModFolder()
+        public override string GetGameName()
+        {
+            return "Content Warning";
+        }
+
+        public override bool CleanTempModFolder()
         {
             throw new NotImplementedException();
         }
 
-        public bool CleanUpOldMods()
+       
+
+        public override bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus)
         {
             throw new NotImplementedException();
         }
 
-        public bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsGameInstalled()
-        {
-            return SteamUtil.IsCWInstalled();
-        }
-
-        public bool IsModInstalled()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool MoveTempModsToReal()
+     
+        public override bool MoveTempModsToReal()
         {
             throw new NotImplementedException();
         }

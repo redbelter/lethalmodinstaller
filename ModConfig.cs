@@ -65,7 +65,7 @@ namespace LethalRed
 
         public Dictionary<string, List<ModInstallRequest>> AllMods = new Dictionary<string, List<ModInstallRequest>>();
 
-        string defaultConfig = @"{""LethalCompany"": [
+        string defaultConfig = @"{""Lethal Company"": [
     ""BepInEx-BepInExPack"",
     ""x753-More_Suits"", 
    	""amnsoft-EmployeeAssignments"",
