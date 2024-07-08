@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Runtime;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ namespace LethalRed
     public class LethalModInstaller : IModInstallBasic
     {
         private static readonly string TEMP_DIRECTORY = "tempout";
-        private static readonly string FAKE_LETHAL = "fakelethal";
         private static readonly string MODDEDLIST = "moddedfiles.txt";
 
         public override string GetSteamGameName()
@@ -26,20 +26,15 @@ namespace LethalRed
         {
             return "Lethal Company";
         }
-        public override bool CleanTempModFolder()
-        {
-            if (Directory.Exists(FAKE_LETHAL))
-            {
-                Directory.Delete(FAKE_LETHAL, true);
-            }
-            return true;
-        }
+      
 
     
 
         public override bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus)
         {
-            string fakeLethalPath = Path.Combine(FileIO.GetExecutableCurrentDir(), FAKE_LETHAL);
+
+            Console.WriteLine("Using " + GetTempFolderPath() + " for temp install");
+            string fakeLethalPath = GetTempFolderPath();
             // CheckForVirus.CheckFileTest();
             var ret = StoreAPI.GetPackages();
             ret.Wait();
@@ -58,7 +53,7 @@ namespace LethalRed
             bool waitforever = true;
             while (waitforever)
             {
-                waitforever = LethalModUtil.WaitForScan;
+                waitforever = ModInstallGlobals.WaitForScan;
                 try
                 {
                     var xx = CheckForVirus.CheckFile(req.FullName, "temp.zip");
@@ -113,12 +108,21 @@ namespace LethalRed
                     if (Directory.Exists(Path.Combine(TEMP_DIRECTORY, "plugins")))
                     {
                         //This is a mod where it put stuff in plugins, move it to bepin
-                        Directory.CreateDirectory(Path.Combine(fakeLethalPath, "BepInEx"));
-                        Directory.CreateDirectory(Path.Combine(fakeLethalPath, "BepInEx", "plugins"));
+                        GetBepInExPluginFolderInTemp(true);
                         FileIO.CopyFilesRecursively(Path.Combine(TEMP_DIRECTORY, "plugins"), Path.Combine(fakeLethalPath, "BepInEx", "plugins"));
                     }
                     else if (Directory.Exists(Path.Combine(TEMP_DIRECTORY, "BepInEx")))
                     {
+                        foreach (var file in Directory.GetFiles(TEMP_DIRECTORY))
+                        {
+                            if (file.EndsWith(".dll"))
+                            {
+                                GetBepInExConfigFolderInTemp(true);
+
+                                File.Copy(file, Path.Combine(GetBepInExPluginFolderInTemp(true), Path.GetFileName(file)));
+                                File.Delete(file);
+                            } 
+                        }
                         //This one likely did the right thing
                         FileIO.CopyFilesRecursively(TEMP_DIRECTORY, fakeLethalPath);
                     }
@@ -144,22 +148,24 @@ namespace LethalRed
             return true;
         }
 
+      
+
 
         private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings()
         {
             Formatting = Formatting.Indented,
             ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
         };
-        public static void GenerateModFileList()
+        public static void GenerateModFileList(IModInstall modInstall)
         {
             List<string> files = new List<string>();
 
-            foreach (string file in FileIO.GetFiles(FAKE_LETHAL))
+            foreach (string file in FileIO.GetFiles(modInstall.GetTempFolderPath()))
             {
-                files.Add(file.Replace(FAKE_LETHAL, "").Substring(1));
+                files.Add(file.Replace(modInstall.GetTempFolderPath(), "").Substring(1));
             }
 
-            FileIO.DeleteFileIfExists(Path.Combine(FAKE_LETHAL, MODDEDLIST));
+            FileIO.DeleteFileIfExists(Path.Combine(modInstall.GetTempFolderPath(), MODDEDLIST));
             var serializer = JsonSerializer.Create(_settings);
             var stringBuilder = new StringBuilder();
             using (var writer = new JsonTextWriter(new StringWriter(stringBuilder)))
@@ -167,18 +173,18 @@ namespace LethalRed
                 serializer.Serialize(writer, files);
             }
             var moddedjson = stringBuilder.ToString();
-            File.WriteAllText(Path.Combine(FAKE_LETHAL, MODDEDLIST), moddedjson);
+            File.WriteAllText(Path.Combine(modInstall.GetTempFolderPath(), MODDEDLIST), moddedjson);
         }
 
 
 
         public override bool MoveTempModsToReal()
         {
-            GenerateModFileList();
-            string fakeLethalPath = Path.Combine(FileIO.GetExecutableCurrentDir(), FAKE_LETHAL);
+            GenerateModFileList(this);
+            string fakeLethalPath = GetTempFolderPath();
             string tempPath = Path.Combine(FileIO.GetExecutableCurrentDir(), TEMP_DIRECTORY);
             Console.WriteLine("About to write to lethal folder, if you want to preview it you can go here: " + Environment.NewLine + fakeLethalPath);
-            if (LethalModUtil.WaitForScan)
+            if (ModInstallGlobals.WaitForScan)
             {
                 Console.WriteLine("The scan detected " + CheckForVirus.TotalVirusHits + " hits out of " + CheckForVirus.TotalChecks + ". If this is below 5 this is ok.");
             }

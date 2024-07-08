@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LethalRed
@@ -10,6 +11,7 @@ namespace LethalRed
     public class ModInstallGlobals
     {
         public static readonly string BEPINEX_FOLDER = "BepInEx";
+        public static bool WaitForScan = true;
     }
 
 
@@ -44,11 +46,94 @@ namespace LethalRed
             return true;
         }
 
-        public abstract bool CleanTempModFolder();
+        public string GetTempFolderName()
+        {
+            Regex rgx = new Regex("[^a-zA-Z0-9 -]");
+            string str = rgx.Replace(GetGameName(), "");
+            return "FAKE_" + str.Replace(" ", "");
+        }
+
+        public string GetTempFolderPath()
+        {
+            return Path.Combine(FileIO.GetExecutableCurrentDir(), GetTempFolderName());
+        }
+
+        public bool CleanTempModFolder()
+        {
+            if (Directory.Exists(GetTempFolderPath()))
+            {
+                Directory.Delete(GetTempFolderPath(), true);
+            }
+            return true;
+        }
 
         public abstract bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus);
 
         public abstract bool MoveTempModsToReal();
+
+        public string GetBepInExConfigFolderInTemp(bool createIfNotExist = true)
+        {
+            string bepinPath = Path.Combine(GetTempFolderPath(), "BepInEx");
+            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), "BepInEx", "config");
+            if (!Directory.Exists(bepinPath))
+            {
+                if (createIfNotExist)
+                {
+                    Directory.CreateDirectory(bepinPath);
+                }
+            }
+
+            if (!Directory.Exists(bepinPathPlugin))
+            {
+                if (createIfNotExist)
+                {
+                    Directory.CreateDirectory(bepinPathPlugin);
+                }
+            }
+            return bepinPathPlugin;
+        }
+
+        public string GetBepInExPluginFolderInTemp(bool createIfNotExist = true)
+        {
+            string bepinPath = Path.Combine(GetTempFolderPath(), "BepInEx");
+            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), "BepInEx", "plugins");
+            if (!Directory.Exists(bepinPath))
+            {
+                if (createIfNotExist)
+                {
+                    Directory.CreateDirectory(bepinPath);
+                }
+            }
+
+            if (!Directory.Exists(bepinPathPlugin))
+            {
+                if (createIfNotExist)
+                {
+                    Directory.CreateDirectory(bepinPathPlugin);
+                }
+            }
+            return bepinPathPlugin;
+        }
+
+        public void ModifyConfigFiles()
+        {
+            foreach (var file in FileIO.GetFiles(GetTempFolderPath()))
+            {
+                //TestAccount666.ShipWindows.cfg
+                if (file.Contains("TestAccount666.ShipWindows.cfg"))
+                {
+                    string allText = File.ReadAllText(file);
+                    allText = allText.Replace("Enable Wesley shutter voice lines = true", "Enable Wesley shutter voice lines = false");
+                    allText = allText.Replace("Play Wesley shutter voice lines on transitions = true", "Play Wesley shutter voice lines on transitions = false");
+                    File.WriteAllText(file, allText);
+                } else
+                {
+
+                }
+
+            }
+        }
+
     }
 
     public interface IModInstall
@@ -68,5 +153,15 @@ namespace LethalRed
         bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus);
 
         bool MoveTempModsToReal();
+
+        string GetTempFolderName();
+        string GetTempFolderPath();
+
+        void ModifyConfigFiles();
+
+        string GetBepInExConfigFolderInTemp(bool createIfNotExist);
+
+        string GetBepInExPluginFolderInTemp(bool createIfNotExist);
+
     }
 }

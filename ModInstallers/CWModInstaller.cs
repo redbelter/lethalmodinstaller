@@ -18,11 +18,7 @@ namespace LethalRed
             return "Content Warning";
         }
 
-        public override bool CleanTempModFolder()
-        {
-            throw new NotImplementedException();
-        }
-
+      
        
 
         public override bool InstallModsToTempFolder(ModInstallRequest req, bool blockOnVirus)

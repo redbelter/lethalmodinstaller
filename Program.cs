@@ -32,13 +32,13 @@ namespace LethalRed
                 string dontcarecheck = Console.ReadLine();
                 if (dontcarecheck != null && dontcarecheck.Equals("scan", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    LethalModUtil.WaitForScan = true;
+                    ModInstallGlobals.WaitForScan = true;
                     Console.WriteLine("Will scan for viruses...");
                     Thread.Sleep(1000);
                 }
                 else
                 {
-                    LethalModUtil.WaitForScan = false;
+                    ModInstallGlobals.WaitForScan = false;
                     Console.WriteLine("Skipping virus check confirmed...");
                     Thread.Sleep(1000);
                 }

@@ -80,7 +80,6 @@
     <Compile Include="ModInstallers\GenericModInstallFlow.cs" />
     <Compile Include="ModInstallers\IModInstall.cs" />
     <Compile Include="ModInstallers\LethalModInstaller.cs" />
-    <Compile Include="ModInstallers\LethalModUtil.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

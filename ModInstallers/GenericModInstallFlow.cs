@@ -58,7 +58,7 @@ namespace LethalRed.ModInstallers
                     IModInstall yay = gamesMods[inputnumber]; //This will throw exception if it's bad
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("invalid input, type the number only");
                 }
@@ -103,6 +103,7 @@ namespace LethalRed.ModInstallers
                     mod.InstallModsToTempFolder(request, true);
                     current++;
                 }
+                
 
                 mod.MoveTempModsToReal();
 
