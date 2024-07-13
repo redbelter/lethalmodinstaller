@@ -110,8 +110,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 1.4
-        release_name: Red's Lethal Mod Installer 1.4
+        tag_name: 1.4.1
+        release_name: Red's Lethal Mod Installer 1.4.1
         draft: false
         prerelease: false
 

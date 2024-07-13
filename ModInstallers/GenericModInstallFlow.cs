@@ -80,10 +80,16 @@ namespace LethalRed.ModInstallers
                 if (mod.IsModInstalled())
                 {
                     Console.WriteLine("Lethal appears to be modded already.");
-                    Console.WriteLine("Press enter to remove existing mods.");
+                    Console.WriteLine("Press enter to reinstall the mods, type \"clean\" if you want to uninstall the mods only.");
                     Console.Write("> ");
-                    Console.ReadLine();
+                    string cleanonly = Console.ReadLine();
                     mod.CleanUpOldMods();
+                    if (cleanonly.Trim().Equals("clean", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("Done cleaning up mods, thank you! Press enter to exit");
+                        Console.ReadLine();
+                        return;
+                    }
                 }
                 else
                 {
