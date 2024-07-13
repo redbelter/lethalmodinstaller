@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LethalRed.ModArtifacts;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -144,7 +145,10 @@ namespace LethalRed
 
 
             }
-        
+
+           
+
+
             return true;
         }
 

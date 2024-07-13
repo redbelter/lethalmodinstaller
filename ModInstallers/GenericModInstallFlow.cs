@@ -103,7 +103,7 @@ namespace LethalRed.ModInstallers
                     mod.InstallModsToTempFolder(request, true);
                     current++;
                 }
-                
+                mod.ModifyConfigFiles();
 
                 mod.MoveTempModsToReal();
 

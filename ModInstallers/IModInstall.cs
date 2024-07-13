@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LethalRed.ModArtifacts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -73,8 +74,8 @@ namespace LethalRed
 
         public string GetBepInExConfigFolderInTemp(bool createIfNotExist = true)
         {
-            string bepinPath = Path.Combine(GetTempFolderPath(), "BepInEx");
-            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), "BepInEx", "config");
+            string bepinPath = Path.Combine(GetTempFolderPath(), ModInstallGlobals.BEPINEX_FOLDER);
+            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), ModInstallGlobals.BEPINEX_FOLDER, "config");
             if (!Directory.Exists(bepinPath))
             {
                 if (createIfNotExist)
@@ -95,8 +96,8 @@ namespace LethalRed
 
         public string GetBepInExPluginFolderInTemp(bool createIfNotExist = true)
         {
-            string bepinPath = Path.Combine(GetTempFolderPath(), "BepInEx");
-            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), "BepInEx", "plugins");
+            string bepinPath = Path.Combine(GetTempFolderPath(), ModInstallGlobals.BEPINEX_FOLDER);
+            string bepinPathPlugin = Path.Combine(GetTempFolderPath(), ModInstallGlobals.BEPINEX_FOLDER, "plugins");
             if (!Directory.Exists(bepinPath))
             {
                 if (createIfNotExist)
@@ -117,21 +118,7 @@ namespace LethalRed
 
         public void ModifyConfigFiles()
         {
-            foreach (var file in FileIO.GetFiles(GetTempFolderPath()))
-            {
-                //TestAccount666.ShipWindows.cfg
-                if (file.Contains("TestAccount666.ShipWindows.cfg"))
-                {
-                    string allText = File.ReadAllText(file);
-                    allText = allText.Replace("Enable Wesley shutter voice lines = true", "Enable Wesley shutter voice lines = false");
-                    allText = allText.Replace("Play Wesley shutter voice lines on transitions = true", "Play Wesley shutter voice lines on transitions = false");
-                    File.WriteAllText(file, allText);
-                } else
-                {
-
-                }
-
-            }
+            ConfigsForLethalMods.WriteConfigForLethal(this.GetBepInExConfigFolderInTemp());
         }
 
     }

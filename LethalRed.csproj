@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckForVirus.cs" />
+    <Compile Include="ModArtifacts\ConfigsForLethalMods.cs" />
     <Compile Include="ModInstallers\CWModInstaller.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="ModInstallers\GenericModInstallFlow.cs" />
